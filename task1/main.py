@@ -48,14 +48,14 @@ def vigenere_encrypt(text, key):
             else:
                 base = ord('а')
 
-            # Вычисляем позицию в алфавите (0-30)
+            # Вычисляем позицию в алфавите
             char_pos = ord(char.lower()) - ord('а')
             # Применяем шифр Виженера
             new_pos = (char_pos + offset) % alphabet_length
             new_char = chr(base + new_pos)
             encrypted_chars.append(new_char)
         else:
-            # Оставляем не-русские символы и без изменений
+            # Оставляем нерусские символы без изменений
             encrypted_chars.append(char)
 
     return ''.join(encrypted_chars)

@@ -29,7 +29,6 @@ def calculate_index(text):
     char_count = {}  # Словарь
     text_len = len(text)
 
-    # Подсчет кол-ва символов в тексте
     for char in text:
         if char in char_count:
             char_count[char] += 1
@@ -44,17 +43,10 @@ def calculate_index(text):
 
 def main():
     try:
-        # Чтение файла
         text = read_file(PATH_ENCRYPTED)
-
-        # Зашифрованный текст
         print("\nЗашифрованный текст:\n")
         print(text)
-
-        # индексы встречаемости
         percent_dict = calculate_index(text)
-
-        # Сортировка частот
         print("Индекс частот: ")
         sorted_dict = {}
         for key in sorted(percent_dict, key=percent_dict.get, reverse=True):
@@ -65,12 +57,9 @@ def main():
             if char in DECRYPT_KEY:
                 text = text.replace(char, DECRYPT_KEY[char])
         print(text)
-
         crypt_key = DECRYPT_KEY
         print("\nКлюч шифрования:\n")
         print(crypt_key)
-
-        # Запись результатов
         write_to_file(PATH_DECRYPTED, text)
         write_to_file(PATH_KEY, str(crypt_key))
         print("\nРезультаты успешно записаны в файлы")
