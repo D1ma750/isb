@@ -1,3 +1,6 @@
+from const import *
+
+
 def read_file(filename):
     """Чтение содержимого файла."""
     with open(filename, 'r', encoding='utf-8') as file:
@@ -74,13 +77,8 @@ def validate_key(key):
 def main():
     """Основная функция программы."""
     try:
-        # Чтение исходного текста и ключа
-        input_filename = 'input.txt'
-        key_filename = 'key.txt'
-        output_filename = 'encrypted.txt'
-
-        text = read_file(input_filename)
-        key = read_file(key_filename).strip()
+        text = read_file(INPUT_FILENAME)
+        key = read_file(KEY_FILENAME).strip()
 
         # Валидация ключа
         validate_key(key)
@@ -89,8 +87,8 @@ def main():
         encrypted_text = vigenere_encrypt(text, key)
 
         # Запись результата
-        write_file(output_filename, encrypted_text)
-        print(f"Текст успешно зашифрован и сохранён в {output_filename}")
+        write_file(OUTPUT_FILENAME, encrypted_text)
+        print(f"Текст успешно зашифрован и сохранён в {OUTPUT_FILENAME}")
 
     except FileNotFoundError as e:
         print(f"Ошибка: файл не найден - {e.filename}")
