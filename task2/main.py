@@ -1,5 +1,5 @@
-from constants import *
 import json
+from constants import *
 
 
 def write_to_file(filename, content):
@@ -24,6 +24,7 @@ def read_file(filename):
 def read_json(filename: str) -> dict:
     """
     Загружает из JSON-файла.
+    :param filename: имя файла
     """
     try:
         with open(filename, "r", encoding="utf-8") as f:
@@ -56,6 +57,11 @@ def calculate_frequency(text):
 
 
 def decrypt_text(text, key):
+    '''
+    Дешифрует текст
+    :param text: зашифрованный текст
+    :param key: ключ для расшифровки
+    '''
     for original_char, replacement_char in key.items():
         text = text.replace(original_char, replacement_char)
     return text
