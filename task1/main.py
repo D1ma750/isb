@@ -2,32 +2,50 @@ from const import *
 
 
 def read_file(filename):
-    """Чтение содержимого файла."""
+    """Читает содержимое файла.
+
+    Args:
+        filename (str): Путь до файла.
+
+    Returns:
+        str: Содержимое файла.
+    """
     with open(filename, 'r', encoding='utf-8') as file:
         return file.read()
 
 
 def write_file(filename, content):
-    """Запись содержимого в файл."""
+    """Записывает содержимое в файл.
+
+    Args:
+        filename (str): Путь до файла.
+        content (str): Данные для записи.
+    """
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(content)
 
 
 def is_russian_letter(char):
-    """Проверка, является ли символ русской буквой (без учёта 'ё')."""
+    """Проверяет, является ли символ русской буквой (исключая 'ё').
+
+    Args:
+        char (str): Символ для проверки.
+
+    Returns:
+        bool: True, если символ — русская буква (кроме 'ё'), иначе False.
+    """
     return 'а' <= char.lower() <= 'я' and char.lower() != 'ё'
 
 
 def vigenere_encrypt(text, key):
-    """
-    Шифрование русскоязычного текста шифром Виженера.
+    """Шифрует русскоязычный текст шифром Виженера.
 
     Args:
-        text: Исходный текст для шифрования.
-        key: Ключ для шифрования.
+        text (str): Исходный текст для шифрования.
+        key (str): Ключ для шифрования.
 
     Returns:
-        Зашифрованный текст с сохранением регистра и не-буквенных символов.
+        str: Зашифрованный текст с сохранением регистра и не-буквенных символов.
     """
     encrypted_chars = []
     key_length = len(key)
@@ -65,14 +83,20 @@ def vigenere_encrypt(text, key):
 
 
 def validate_key(key):
-    """Проверка валидности ключа."""
+    """Проверяет корректность ключа.
+
+    Args:
+        key (str): Ключ для проверки.
+
+    Raises:
+        ValueError: Если ключ пустой или содержит недопустимые символы.
+    """
     if not key:
         raise ValueError("Ключ не может быть пустым")
 
     for char in key:
         if not is_russian_letter(char):
             raise ValueError("Ключ должен содержать только русские буквы (без 'ё')")
-
 
 def main():
     """Основная функция программы."""

@@ -7,6 +7,7 @@ def write_to_file(filename, content):
     Записывает содержимое в файл
     :param filename: имя файла
     :param content: содержимое для записи
+    :return: новый файл
     """
     with open(filename, 'w', encoding='utf-8') as file:
         file.write(content)
@@ -16,6 +17,7 @@ def read_file(filename):
     """
     Читает данные из файл
     :param filename: имя файла
+    :return: текст из файла
     """
     with open(filename, "r", encoding="utf-8") as file:
         return file.read()
@@ -25,6 +27,7 @@ def read_json(filename: str) -> dict:
     """
     Загружает из JSON-файла.
     :param filename: имя файла
+    :return: данные из файла
     """
     try:
         with open(filename, "r", encoding="utf-8") as f:
@@ -61,6 +64,7 @@ def decrypt_text(text, key):
     Дешифрует текст
     :param text: зашифрованный текст
     :param key: ключ для расшифровки
+    :return: дешифрованный текст
     '''
     for original_char, replacement_char in key.items():
         text = text.replace(original_char, replacement_char)
