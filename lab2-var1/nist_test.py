@@ -11,16 +11,9 @@ def test_frequency(bit_string):
     :returns
     res: результат теста.
     """
-    total = 0
-    for bit in bit_string:
-        if bit == "0":
-            total += -1
-        else:
-            total += 1
-    sums = total / math.sqrt(len(bit_string))
-    res = math.erfc(sums / math.sqrt(2))
+    sums = (bit_string.count("1") - bit_string.count("0")) / math.sqrt(len(bit_string))
+    res = math.erfc(abs(sums) / math.sqrt(2))
     return res
-
 
 def test_runs(bit_string):
     """
