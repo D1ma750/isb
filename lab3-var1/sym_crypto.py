@@ -17,21 +17,21 @@ class SymmetricCrypto:
     @staticmethod
     def encrypt_data(data: bytes, key: bytes) -> bytes:
         """Шифрует данные симметричным ключом"""
-        padder = padding.ANSIX923(128).padder()
-        padded_data = padder.update(data) + padder.finalize()
+        pad = padding.ANSIX923(128).padder()
+        pad_data = pad.update(data) + pad.finalize()
 
         iv = os.urandom(16)
         cipher = Cipher(algorithms.AES(key), modes.CBC(iv))
         encryptor = cipher.encryptor()
-        return iv + encryptor.update(padded_data) + encryptor.finalize()
+        return iv + encryptor.update(pad_data) + encryptor.finalize()
 
     @staticmethod
     def decrypt_data(encrypted_data: bytes, key: bytes) -> bytes:
         """Дешифрует данные симметричным ключом"""
         iv = encrypted_data[:16]
         cipher = Cipher(algorithms.AES(key), modes.CBC(iv))
-        decryptor = cipher.decryptor()
-        decrypted_padded = decryptor.update(encrypted_data[16:]) + decryptor.finalize()
+        decryp = cipher.decryptor()
+        decryp_pad = decryp.update(encrypted_data[16:]) + decryp.finalize()
 
-        unpadder = padding.ANSIX923(128).unpadder()
-        return unpadder.update(decrypted_padded) + unpadder.finalize()
+        unpad = padding.ANSIX923(128).unpadder()
+        return unpad.update(decryp_pad) + unpad.finalize()
